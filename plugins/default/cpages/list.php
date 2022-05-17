@@ -30,9 +30,9 @@
     <td><a target="_blank" href="<?php echo $page->getURL();?>"><strong><?php echo $page->title;?></strong></a></td>
     <td><?php echo $page->getURL();?></td>
     <td>
-    	<a target="_blank" href="<?php echo $page->getURL();?>" class="label label-warning" title="<?php echo ossn_print('cpages:view');?>"><i class="fa fa-arrows-alt"></i></a>
-    	<a href="<?php echo $page->getURL(true);?>" class="label label-success" title="<?php echo ossn_print('cpages:edit');?>"><i class="fa fa-pencil"></i></a>
-    	<a href="<?php echo ossn_site_url('action/cpages/delete?guid='.$page->guid, true);?>" class="label label-danger ossn-make-sure" title="<?php echo ossn_print('cpages:delete');?>"><i class="fa fa-trash-o"></i></a>
+    	<a target="_blank" href="<?php echo $page->getURL();?>" class="badge bg-warning label label-warning" title="<?php echo ossn_print('cpages:view');?>"><i class="fa fa-arrows-alt"></i></a>
+    	<a href="<?php echo $page->getURL(true);?>" class="badge bg-success label label-success" title="<?php echo ossn_print('cpages:edit');?>"><i class="fa fa-pencil-alt"></i></a>
+    	<a href="<?php echo ossn_site_url('action/cpages/delete?guid='.$page->guid, true);?>" class="badge bg-danger label label-danger ossn-make-sure" title="<?php echo ossn_print('cpages:delete');?>"><i class="fa fa-trash"></i></a>
     </td>
   </tr>
 <?php } 
