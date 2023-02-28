@@ -10,7 +10,7 @@
  */
 
 define('PAGES', ossn_route()->com . 'Pages/');
-require_once(PAGES . 'classes/Pages.php');
+require_once PAGES . 'classes/Pages.php';
 /**
  * Pages Init
  *
@@ -19,22 +19,27 @@ require_once(PAGES . 'classes/Pages.php');
 function com_pages_init() {
 		ossn_extend_view('css/ossn.default', 'cpages/css');
 		ossn_extend_view('js/opensource.socialnetwork', 'cpages/js');
-	
+
 		ossn_register_site_settings_page('cpages', 'settings/admin/cpages');
-	 	ossn_register_admin_sidemenu('admin:cpages', 'admin:cpages', ossn_site_url('administrator/settings/cpages?mpage=list'), ossn_print('admin:sidemenu:settings'));
-		
 		if(ossn_isAdminLoggedin()) {
+				ossn_register_menu_item('admin/sidemenu', array(
+						'name'   => 'admin:cpages',
+						'text'   => ossn_print('admin:cpages'),
+						'href'   => ossn_site_url('administrator/settings/cpages?mpage=list'),
+						'parent' => 'admin:sidemenu:settings',
+				));
+
 				ossn_register_action('cpages/add', PAGES . 'actions/add.php');
 				ossn_register_action('cpages/edit', PAGES . 'actions/edit.php');
 				ossn_register_action('cpages/delete', PAGES . 'actions/delete.php');
 		}
-		ossn_register_page('p', 'com_pages_page_handler');		
+		ossn_register_page('p', 'com_pages_page_handler');
 }
-/** 
+/**
  * Get page object
- * 
+ *
  * @param integer $guid A page guid
- * 
+ *
  * @return object|boolean
  */
 function com_pages_get_page($guid) {
@@ -46,23 +51,23 @@ function com_pages_get_page($guid) {
 		}
 		return false;
 }
-/** 
+/**
  * Pages pages
- * 
+ *
  * @param array $pages A pages
- * 
+ *
  * @return mixdata
  */
-function com_pages_page_handler($pages){
-			$page		 = com_pages_get_page($pages[0]);
-			if(!$page) {
-					ossn_error_page();
-			}
-			$title               = $page->title;
-			$contents['content'] = ossn_plugin_view('cpages/view', array(
-					'page' 		  => $page,
-			));
-			$content             = ossn_set_page_layout('contents', $contents);
-			echo ossn_view_page($title, $content);
+function com_pages_page_handler($pages) {
+		$page = com_pages_get_page($pages[0]);
+		if(!$page) {
+				ossn_error_page();
+		}
+		$title               = $page->title;
+		$contents['content'] = ossn_plugin_view('cpages/view', array(
+				'page' => $page,
+		));
+		$content = ossn_set_page_layout('contents', $contents);
+		echo ossn_view_page($title, $content);
 }
 ossn_register_callback('ossn', 'init', 'com_pages_init');
