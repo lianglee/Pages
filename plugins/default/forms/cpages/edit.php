@@ -10,7 +10,9 @@ if(!$page){
 </div>
 <div>      
         <label><?php echo ossn_print('cpages:description');?></label>
-        <textarea class="ossn-editor" name="description"  autocomplete="off"><?php echo html_entity_decode($page->description);?></textarea>
+        <textarea class="ossn-pages-editor" name="description"  autocomplete="off"><?php echo html_entity_decode($page->description);?></textarea>
 </div>   
 <input type="hidden" value="<?php echo $page->guid;?>" name="guid" />
 <input type="submit" class="btn btn-success btn-sm margin-top-10" value="<?php echo ossn_print('save');?>" />
+<?php
+echo ossn_plugin_view('cpages/editor_js');
